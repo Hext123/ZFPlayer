@@ -36,6 +36,10 @@
 @property (nonatomic, strong) UIView *bottomToolView;
 /// 顶部工具栏
 @property (nonatomic, strong) UIView *topToolView;
+/// 返回按钮
+@property (nonatomic, strong) UIButton *backBtn;
+/// 投屏按钮
+@property (nonatomic, strong) UIButton *toupingBtn;
 /// 标题
 @property (nonatomic, strong) UILabel *titleLabel;
 /// 播放或暂停按钮
@@ -61,6 +65,8 @@
         [self addSubview:self.topToolView];
         [self addSubview:self.bottomToolView];
         [self addSubview:self.playOrPauseBtn];
+        [self.topToolView addSubview:self.backBtn];
+        [self.topToolView addSubview:self.toupingBtn];
         [self.topToolView addSubview:self.titleLabel];
         [self.bottomToolView addSubview:self.currentTimeLabel];
         [self.bottomToolView addSubview:self.slider];
@@ -93,9 +99,21 @@
     min_h = 40;
     self.topToolView.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
-    min_x = 15;
+    min_x = 0;
+    min_y = 0;
+    min_w = 40;
+    min_h = 40;
+    self.backBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    
+    min_x = min_view_w - 40;
+    min_y = 0;
+    min_w = 40;
+    min_h = 40;
+    self.toupingBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    
+    min_x = 40;
     min_y = 5;
-    min_w = min_view_w - min_x - 15;
+    min_w = min_view_w - min_x - 40;
     min_h = 30;
     self.titleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
@@ -307,6 +325,22 @@
         _topToolView.layer.contents = (id)image.CGImage;
     }
     return _topToolView;
+}
+
+- (UIButton *)backBtn {
+    if (!_backBtn) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backBtn setImage:ZFPlayer_Image(@"ZFPlayer_back_full") forState:UIControlStateNormal];
+    }
+    return _backBtn;
+}
+
+- (UIButton *)toupingBtn {
+    if (!_toupingBtn) {
+        _toupingBtn = UIButton.new;
+        [_toupingBtn setTitle:@"投" forState:UIControlStateNormal];
+    }
+    return _toupingBtn;
 }
 
 - (UILabel *)titleLabel {

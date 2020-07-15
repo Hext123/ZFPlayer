@@ -43,6 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 标题
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 
+/// 速率按钮
+@property (nonatomic, strong, readonly) UIButton *rateBtn;
+/// 下集按钮
+@property (nonatomic, strong, readonly) UIButton *nextBtn;
+
 /// 底部工具栏
 @property (nonatomic, strong, readonly) UIView *bottomToolView;
 

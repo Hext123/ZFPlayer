@@ -38,6 +38,10 @@
 @property (nonatomic, strong) UIButton *backBtn;
 /// 标题
 @property (nonatomic, strong) UILabel *titleLabel;
+/// 速率按钮
+@property (nonatomic, strong) UIButton *rateBtn;
+/// 下集按钮
+@property (nonatomic, strong) UIButton *nextBtn;
 /// 底部工具栏
 @property (nonatomic, strong) UIView *bottomToolView;
 /// 播放或暂停按钮
@@ -68,10 +72,12 @@
         [self.topToolView addSubview:self.titleLabel];
         [self addSubview:self.bottomToolView];
         [self.bottomToolView addSubview:self.playOrPauseBtn];
+        [self.bottomToolView addSubview:self.nextBtn];
         [self.bottomToolView addSubview:self.currentTimeLabel];
         
         [self.bottomToolView addSubview:self.slider];
         [self.bottomToolView addSubview:self.totalTimeLabel];
+        [self.bottomToolView addSubview:self.rateBtn];
         [self addSubview:self.lockBtn];
         
         // 设置子控件的响应事件
@@ -132,17 +138,31 @@
     
     min_x = self.playOrPauseBtn.zf_right + 4;
     min_y = 0;
+    min_w = 30;
+    min_h = 30;
+    self.nextBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    self.nextBtn.zf_centerY = self.playOrPauseBtn.zf_centerY;
+    
+    min_x = self.nextBtn.zf_right + 4;
+    min_y = 0;
     min_w = 62;
     min_h = 30;
     self.currentTimeLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     self.currentTimeLabel.zf_centerY = self.playOrPauseBtn.zf_centerY;
     
     min_w = 62;
-    min_x = self.bottomToolView.zf_width - min_w - ((iPhoneX && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) ? 44: min_margin);
+    min_x = self.bottomToolView.zf_width - min_w - ((iPhoneX && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) ? 44: min_margin) - 40;
     min_y = 0;
     min_h = 30;
     self.totalTimeLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     self.totalTimeLabel.zf_centerY = self.playOrPauseBtn.zf_centerY;
+    
+    min_x = self.totalTimeLabel.zf_right;
+    min_y = 0;
+    min_w = 40;
+    min_h = 40;
+    self.rateBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    self.rateBtn.zf_centerY = self.playOrPauseBtn.zf_centerY;
     
     min_x = self.currentTimeLabel.zf_right + 4;
     min_y = 0;
@@ -380,6 +400,14 @@
     return _backBtn;
 }
 
+- (UIButton *)rateBtn {
+    if (!_rateBtn) {
+        _rateBtn = UIButton.new;
+        [_rateBtn setTitle:@"1.0X" forState:UIControlStateNormal];
+    }
+    return _rateBtn;
+}
+
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
@@ -405,6 +433,14 @@
         [_playOrPauseBtn setImage:ZFPlayer_Image(@"ZFPlayer_pause") forState:UIControlStateSelected];
     }
     return _playOrPauseBtn;
+}
+
+- (UIButton *)nextBtn {
+    if (!_nextBtn) {
+        _nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_nextBtn setImage:ZFPlayer_Image(@"ZFPlayer_next") forState:UIControlStateNormal];
+    }
+    return _nextBtn;
 }
 
 - (UILabel *)currentTimeLabel {

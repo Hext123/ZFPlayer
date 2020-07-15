@@ -40,6 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 顶部工具栏
 @property (nonatomic, strong, readonly) UIView *topToolView;
 
+/// 返回按钮
+@property (nonatomic, strong, readonly) UIButton *backBtn;
+/// 投屏按钮
+@property (nonatomic, strong, readonly) UIButton *toupingBtn;
+
 /// 标题
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 
