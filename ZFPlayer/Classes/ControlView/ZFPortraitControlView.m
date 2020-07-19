@@ -32,6 +32,8 @@
 #endif
 
 @interface ZFPortraitControlView () <ZFSliderViewDelegate>
+/// 暂停广告按钮
+@property (nonatomic, strong) UIButton *pauseAdBtn;
 /// 底部工具栏
 @property (nonatomic, strong) UIView *bottomToolView;
 /// 顶部工具栏
@@ -62,6 +64,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         // 添加子控件
+        [self addSubview:self.pauseAdBtn];
         [self addSubview:self.topToolView];
         [self addSubview:self.bottomToolView];
         [self addSubview:self.playOrPauseBtn];
@@ -92,6 +95,12 @@
     CGFloat min_view_w = self.bounds.size.width;
     CGFloat min_view_h = self.bounds.size.height;
     CGFloat min_margin = 9;
+    
+    min_x = 40;
+    min_y = 40;
+    min_w = min_view_w - 80;
+    min_h = min_view_h - 80;
+    self.pauseAdBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = 0;
     min_y = 0;
@@ -191,6 +200,8 @@
 
 - (void)playBtnSelectedState:(BOOL)selected {
     self.playOrPauseBtn.selected = selected;
+    
+    self.pauseAdBtn.hidden = selected;
 }
 
 #pragma mark - ZFSliderViewDelegate
@@ -317,6 +328,13 @@
 }
 
 #pragma mark - getter
+
+- (UIButton *)pauseAdBtn {
+    if (!_pauseAdBtn) {
+        _pauseAdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
+    return _pauseAdBtn;
+}
 
 - (UIView *)topToolView {
     if (!_topToolView) {

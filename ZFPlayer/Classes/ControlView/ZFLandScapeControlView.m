@@ -32,6 +32,8 @@
 #endif
 
 @interface ZFLandScapeControlView () <ZFSliderViewDelegate>
+/// 暂停广告按钮
+@property (nonatomic, strong) UIButton *pauseAdBtn;
 /// 顶部工具栏
 @property (nonatomic, strong) UIView *topToolView;
 /// 返回按钮
@@ -67,6 +69,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        [self addSubview:self.pauseAdBtn];
         [self addSubview:self.topToolView];
         [self.topToolView addSubview:self.backBtn];
         [self.topToolView addSubview:self.titleLabel];
@@ -100,6 +103,12 @@
     CGFloat min_view_h = self.bounds.size.height;
     
     CGFloat min_margin = 9; 
+    
+    min_x = 88;
+    min_y = 88;
+    min_w = min_view_w - 176;
+    min_h = min_view_h - 176;
+    self.pauseAdBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = 0;
     min_y = 0;
@@ -229,6 +238,8 @@
 
 - (void)playBtnSelectedState:(BOOL)selected {
     self.playOrPauseBtn.selected = selected;
+    
+    self.pauseAdBtn.hidden = selected;
 }
 
 - (void)lockButtonClickAction:(UIButton *)sender {
@@ -382,6 +393,13 @@
 }
 
 #pragma mark - getter
+
+- (UIButton *)pauseAdBtn {
+    if (!_pauseAdBtn) {
+        _pauseAdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
+    return _pauseAdBtn;
+}
 
 - (UIView *)topToolView {
     if (!_topToolView) {

@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZFPortraitControlView : UIView
 
+/// 暂停广告按钮
+@property (nonatomic, strong, readonly) UIButton *pauseAdBtn;
+
 /// 底部工具栏
 @property (nonatomic, strong, readonly) UIView *bottomToolView;
 
