@@ -104,10 +104,10 @@
     
     CGFloat min_margin = 9; 
     
-    min_x = 88;
     min_y = 88;
-    min_w = min_view_w - 176;
     min_h = min_view_h - 176;
+    min_w = min_h/3*5;
+    min_x = (min_view_w-min_w)/2;
     self.pauseAdBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = 0;
